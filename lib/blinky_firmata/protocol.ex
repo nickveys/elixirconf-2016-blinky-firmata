@@ -13,8 +13,9 @@
     {:ok, %{board: board}}
   end
 
-  def handle_info({:firmata, {:pin_map, _pin_map}}, s) do
+  def handle_info({:firmata, {:pin_map, pin_map}}, s) do
     IO.puts "Set Pin Map"
+    IO.inspect pin_map
     Board.set_pin_mode(s.board, 13, @output)
     send(self, {:blink, 1})
     {:noreply, s}
